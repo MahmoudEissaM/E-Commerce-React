@@ -22,12 +22,10 @@ export function Menu({ addToCart, searchQuery }) {
     }, []);
 
     useEffect(() => {
-        // فلترة المنتجات بناءً على القيمة المدخلة في السيرش
         let filtered = products.filter(product =>
             product.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
 
-        // فلترة إضافية بناءً على الفئة المختارة
         if (categoryFilter !== "all") {
             filtered = filtered.filter(product =>
                 product.category.toLowerCase() === categoryFilter.toLowerCase()
@@ -45,17 +43,17 @@ export function Menu({ addToCart, searchQuery }) {
         <div className="container mt-4">
             <h2 className="menu-title text-center mb-4">Our Menu</h2>
 
-            <div className="text-center mb-4">
-                <Button variant="warning" onClick={() => filterProducts("all")} className="mx-2">All</Button>
-                <Button variant="warning" onClick={() => filterProducts("burger")} className="mx-2">Burgers</Button>
-                <Button variant="warning" onClick={() => filterProducts("pizza")} className="mx-2">Pizzas</Button>
-                <Button variant="warning" onClick={() => filterProducts("pasta")} className="mx-2">Pasta</Button>
-                <Button variant="warning" onClick={() => filterProducts("fries")} className="mx-2">Fries</Button>
+            <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                <Button variant="warning" onClick={() => filterProducts("all")}>All</Button>
+                <Button variant="warning" onClick={() => filterProducts("burger")}>Burgers</Button>
+                <Button variant="warning" onClick={() => filterProducts("pizza")}>Pizzas</Button>
+                <Button variant="warning" onClick={() => filterProducts("pasta")}>Pasta</Button>
+                <Button variant="warning" onClick={() => filterProducts("fries")}>Fries</Button>
             </div>
 
-            <Row>
+            <Row className="justify-content-center">
                 {filteredProducts.map(product => (
-                    <Col md={4} key={product.id} className="mb-4">
+                    <Col md={4} sm={6} xs={12} className="mb-4 d-flex justify-content-center">
                         <ProductCard product={product} addToCart={addToCart} />
                     </Col>
                 ))}
