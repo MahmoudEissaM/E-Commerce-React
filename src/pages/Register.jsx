@@ -43,9 +43,9 @@ export function Register() {
     };
 
     return (
-        <div className="container mt-5">
-            <h2 className="text-center text-success">Register</h2>
-            <form onSubmit={handleRegister} className="shadow p-4 bg-light rounded">
+        <div className="container register-container mt-5">
+            <h2 className="text-center register">Register</h2>
+            <form onSubmit={handleRegister} className="registerForm shadow p-4 bg-light rounded">
                 <input
                     type="text"
                     placeholder="Full Name"
@@ -70,7 +70,9 @@ export function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button className="btn btn-success w-100" type="submit">Register</button>
+                <div className="btn-container">
+                    <button className="btn btn-warning w-25" type="submit">Register</button>
+                </div>
             </form>
         </div>
     );
