@@ -41,7 +41,9 @@ export function Menu({ addToCart, searchQuery }) {
 
     return (
         <div className="container mt-4">
-            <h2 className="menu-title text-center mb-4">Our Menu</h2>
+            <h2 className="menu-title text-center mb-4" style={{ fontFamily: "'Cinzel', serif", fontSize: "3rem", fontWeight: "700", color: "#FFD369" }}>
+                Our Menu
+            </h2>
 
             <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
                 <Button variant="warning" onClick={() => filterProducts("all")}>All</Button>

@@ -18,7 +18,7 @@ export function AboutSection() {
 
                     <Col md={6} className="about-text" style={{ marginTop: "20px" }}>
                         <h2 className="menu-title mb-4" style={{ fontFamily: "'Cinzel', serif", fontSize: "3rem", fontWeight: "700", color: "#FFD369" }}>
-                            We Are Feane
+                            We Are Restoran
                         </h2>
                         <p className="text-light">
                             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
