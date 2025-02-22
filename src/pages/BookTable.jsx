@@ -7,14 +7,16 @@ export function BookTable() {
     return (
         <div style={{ backgroundColor: "#181818", color: "#EEEEEE", minHeight: "100vh", paddingBottom: "50px" }}>
             <Container className="py-5">
-                <Row className="align-items-center">
-                    <Col md={8} className="mb-4">
-                        <BookTableSection />
-                    </Col>
+                <Row>
+                    <div className="bookTable col-lg-12 d-flex justify-content-center align-items-center">
+                        <Col md={8} className="mb-4 col-lg-6 ">
+                            <BookTableSection />
+                        </Col>
 
-                    <Col md={4}>
-                        <MapComponent />
-                    </Col>
+                        <Col md={4} className="col-lg-6">
+                            <MapComponent />
+                        </Col>
+                    </div>
                 </Row>
             </Container>
         </div>

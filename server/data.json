@@ -119,6 +119,34 @@
       "deliveryFee": 20,
       "total": 116.6,
       "date": "2025-02-20T07:09:32.861Z"
+    },
+    {
+      "id": "1740265232321",
+      "customerInfo": {
+        "name": "Nadia Ahmed",
+        "address": "ddghj",
+        "phone": "01204515003",
+        "cardNumber": "",
+        "expiryDate": "",
+        "cvv": ""
+      },
+      "cart": [
+        {
+          "id": "2",
+          "name": "Pepperoni Pizza",
+          "category": "pizza",
+          "price": 20,
+          "quantity": 3,
+          "image": "https://themewagon.github.io/feane/images/f1.png",
+          "description": "Classic pepperoni pizza with a crispy crust."
+        }
+      ],
+      "paymentMethod": "Cash on Delivery",
+      "subtotal": 60,
+      "tax": 9,
+      "deliveryFee": 20,
+      "total": 89,
+      "date": "2025-02-22T23:00:32.321Z"
     }
   ],
   "users": [
