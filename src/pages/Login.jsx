@@ -38,9 +38,9 @@ export function Login() {
     };
 
     return (
-        <div className="container mt-5">
-            <h2 className="text-center text-primary">Login</h2>
-            <form onSubmit={handleLogin} className="shadow p-4 bg-light rounded">
+        <div className="container login-container mt-5">
+            <h2 className="text-center login">Login</h2>
+            <form onSubmit={handleLogin} className="loginForm shadow p-4 bg-light rounded">
                 <input
                     type="email"
                     placeholder="Email"
@@ -57,7 +57,9 @@ export function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button className="btn btn-primary w-100" type="submit">Login</button>
+                <div className='btn-container'>
+                    <button className="btn btn-warning w-25" type="submit">Login</button>
+                </div>
             </form>
         </div>
     );
