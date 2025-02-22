@@ -17,7 +17,7 @@ import { Register } from "../pages/Register";
 export function MainLayout() {
     const [cart, setCart] = useState([]);
     const [cartCount, setCartCount] = useState(0);
-    const [searchQuery, setSearchQuery] = useState(""); // هنا بنعطي قيمة ابتدائية ""
+    const [searchQuery, setSearchQuery] = useState("");
 
     const addToCart = (product) => {
         setCart((prevCart) => {
@@ -49,19 +49,19 @@ export function MainLayout() {
     };
 
     const handleSearch = (query) => {
-        setSearchQuery(query); // تحديث قيمة البحث
+        setSearchQuery(query);
     };
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<SharedLayout cartCount={cartCount} onSearch={handleSearch} />}>
-                    <Route index element={<Home addToCart={addToCart} searchQuery={searchQuery} />} /> {/* هنا بنمرر searchQuery */}
+                    <Route index element={<Home addToCart={addToCart} searchQuery={searchQuery} />} />
                     <Route path='products' element={<Products />} />
                     <Route path='products/:id/edit' element={<ProductForm />} />
                     <Route path='products/new' element={<ProductForm />} />
                     <Route path='products/:id' element={<ProductDetails addToCart={addToCart} />} />
-                    <Route path='menu' element={<Menu addToCart={addToCart} searchQuery={searchQuery} />} /> {/* هنا بنمرر searchQuery */}
+                    <Route path='menu' element={<Menu addToCart={addToCart} searchQuery={searchQuery} />} />
                     <Route path='/about' element={<About />} />
                     <Route path='/book-table' element={<BookTable />} />
                     <Route path='/cart' element={<Cart cart={cart} setCart={setCart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
