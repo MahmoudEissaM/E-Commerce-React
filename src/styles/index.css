@@ -124,7 +124,6 @@ img {
 	transform: scale(1.2);
 }
 
-/* Carousel  */
 .carousel-container {
 	position: relative;
 	width: 100%;
@@ -250,20 +249,20 @@ img {
 
 
 
-/* ملف index.css أو App.css */
+
 .layout-container {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	/* يجعل الصفحة تمتد إلى كامل الشاشة */
+
 }
 
 .content {
 	flex: 1;
-	/* يدفع الفوتر إلى الأسفل */
+
 }
 
-/* تعديل الفوتر ليكون دائمًا في الأسفل */
+
 footer {
 	width: 100%;
 	background: #111;

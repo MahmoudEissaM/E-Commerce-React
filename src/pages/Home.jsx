@@ -8,7 +8,7 @@ import ProductCard from "../components/ProductCard";
 import { AboutSection } from "../components/AboutSection";
 import { BookTable } from "./BookTable";
 
-export function Home({ addToCart }) {
+export function Home({ addToCart, searchQuery }) {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState("all");
@@ -26,17 +26,29 @@ export function Home({ addToCart }) {
         fetchProducts();
     }, []);
 
+    useEffect(() => {
+        // فلترة المنتجات بناءً على القيمة المدخلة في السيرش
+        let filtered = products.filter(product =>
+            product.name && // نتأكد أن product.name موجود
+            product.name.toLowerCase().includes((searchQuery || "").toLowerCase()) // نتأكد أن searchQuery مش undefined
+        );
+
+        // فلترة إضافية بناءً على الفئة المختارة
+        if (categoryFilter !== "all") {
+            filtered = filtered.filter(product =>
+                product.category && // نتأكد أن product.category موجود
+                product.category.toLowerCase() === (categoryFilter || "").toLowerCase() // نتأكد أن categoryFilter مش undefined
+            );
+        }
+
+        setFilteredProducts(filtered);
+    }, [searchQuery, categoryFilter, products]);
+
     const filterProducts = (category) => {
         setCategoryFilter(category);
-        if (category === "all") {
-            setFilteredProducts(products);
-        } else {
-            setFilteredProducts(products.filter(product => product.category.toLowerCase() === category.toLowerCase()));
-        }
     };
 
     return (
-
         <div className="home-container" style={{ backgroundColor: "#181818", color: "#EEEEEE", paddingBottom: "50px", overflowX: "hidden" }}>
 
             {/* ================================Carousel================================ */}

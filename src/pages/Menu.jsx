@@ -3,7 +3,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
-export function Menu({ addToCart }) {
+export function Menu({ addToCart, searchQuery }) {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState("all");
@@ -21,13 +21,24 @@ export function Menu({ addToCart }) {
         fetchProducts();
     }, []);
 
+    useEffect(() => {
+        // فلترة المنتجات بناءً على القيمة المدخلة في السيرش
+        let filtered = products.filter(product =>
+            product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+        // فلترة إضافية بناءً على الفئة المختارة
+        if (categoryFilter !== "all") {
+            filtered = filtered.filter(product =>
+                product.category.toLowerCase() === categoryFilter.toLowerCase()
+            );
+        }
+
+        setFilteredProducts(filtered);
+    }, [searchQuery, categoryFilter, products]);
+
     const filterProducts = (category) => {
         setCategoryFilter(category);
-        if (category === "all") {
-            setFilteredProducts(products);
-        } else {
-            setFilteredProducts(products.filter(product => product.category.toLowerCase() === category.toLowerCase()));
-        }
     };
 
     return (
@@ -45,7 +56,7 @@ export function Menu({ addToCart }) {
             <Row>
                 {filteredProducts.map(product => (
                     <Col md={4} key={product.id} className="mb-4">
-                        <ProductCard product={product} addToCart={addToCart} /> {/* تمرير addToCart إلى ProductCard */}
+                        <ProductCard product={product} addToCart={addToCart} />
                     </Col>
                 ))}
             </Row>

@@ -3,7 +3,7 @@ import { Container, Nav, Navbar, Offcanvas, Button, Form, Badge, Dropdown } from
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FaUtensils, FaShoppingCart, FaUserCircle } from "react-icons/fa";
 
-export function Header({ cartCount }) {
+export function Header({ cartCount, onSearch }) {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -49,6 +49,7 @@ export function Header({ cartCount }) {
                                     placeholder="Search"
                                     className="me-2"
                                     aria-label="Search"
+                                    onChange={(e) => onSearch(e.target.value)} // هنا بنمرر قيمة البحث
                                 />
                                 <Button variant="outline-warning">Search</Button>
                             </Form>
