@@ -1,0 +1,140 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Burger Deluxe",
+      "category": "burger",
+      "price": 15,
+      "quantity": 1,
+      "image": "https://themewagon.github.io/feane/images/f2.png",
+      "description": "A delicious burger with cheese, lettuce, and tomatoes."
+    },
+    {
+      "id": "2",
+      "name": "Pepperoni Pizza",
+      "category": "pizza",
+      "price": 20,
+      "quantity": 5,
+      "image": "https://themewagon.github.io/feane/images/f1.png",
+      "description": "Classic pepperoni pizza with a crispy crust."
+    },
+    {
+      "id": "4",
+      "name": "Veggie Burger",
+      "category": "burger",
+      "price": 12,
+      "quantity": 2,
+      "image": "https://themewagon.github.io/feane/images/f7.png",
+      "description": "A healthy veggie burger with fresh ingredients."
+    },
+    {
+      "id": "5",
+      "name": "Margherita Pizza",
+      "category": "pizza",
+      "price": 18,
+      "quantity": 5,
+      "image": "https://themewagon.github.io/feane/images/f3.png",
+      "description": "Classic Margherita pizza with fresh basil."
+    },
+    {
+      "id": "7",
+      "name": "Chicken Burger",
+      "category": "burger",
+      "price": 14,
+      "quantity": 4,
+      "image": "https://themewagon.github.io/feane/images/f8.png",
+      "description": "A juicy chicken burger with crispy lettuce."
+    },
+    {
+      "id": "8",
+      "name": "Delicious Pasta",
+      "category": "Pasta",
+      "price": 14,
+      "quantity": 4,
+      "image": "https://themewagon.github.io/feane/images/f4.png",
+      "description": "A delicious pasta with creamy sauce."
+    },
+    {
+      "id": "3",
+      "name": "French Fries",
+      "category": "fries",
+      "price": 5,
+      "quantity": 20,
+      "image": "https://themewagon.github.io/feane/images/f5.png",
+      "description": "Crispy golden fries, perfect for any meal."
+    },
+    {
+      "id": "9",
+      "name": "Delicious Pasta",
+      "category": "Pasta",
+      "price": 14,
+      "quantity": 1,
+      "image": "https://themewagon.github.io/feane/images/f9.png",
+      "description": "A delicious pasta with creamy sauce."
+    },
+    {
+      "id": "10",
+      "name": "BBQ Chicken Pizza",
+      "category": "pizza",
+      "price": 22,
+      "quantity": 5,
+      "image": "https://themewagon.github.io/feane/images/f6.png",
+      "description": "BBQ chicken pizza with smoky flavors."
+    }
+  ],
+  "orders": [
+    {
+      "id": "1740035372861",
+      "customerInfo": {
+        "name": "mahmoud",
+        "address": "asasdasd",
+        "phone": "01145633756",
+        "cardNumber": "",
+        "expiryDate": "",
+        "cvv": ""
+      },
+      "cart": [
+        {
+          "id": "4",
+          "name": "Veggie Burger",
+          "category": "burger",
+          "price": 12,
+          "quantity": 2,
+          "image": "https://themewagon.github.io/feane/images/f7.png",
+          "description": "A healthy veggie burger with fresh ingredients."
+        },
+        {
+          "id": "2",
+          "name": "Pepperoni Pizza",
+          "category": "pizza",
+          "price": 20,
+          "quantity": 3,
+          "image": "https://themewagon.github.io/feane/images/f1.png",
+          "description": "Classic pepperoni pizza with a crispy crust."
+        }
+      ],
+      "paymentMethod": "Cash on Delivery",
+      "subtotal": 84,
+      "tax": 12.6,
+      "deliveryFee": 20,
+      "total": 116.6,
+      "date": "2025-02-20T07:09:32.861Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "mahmoudessa33@gmail.com",
+      "password": "123568",
+      "role": "admin"
+    },
+    {
+      "id": "84e1",
+      "name": "mahmoud",
+      "email": "mahmoudessa1133@gmail.com",
+      "password": "123456",
+      "role": "user"
+    }
+  ]
+}
