@@ -7,7 +7,7 @@ export function MapComponent() {
             <iframe
                 title="Google Map"
                 width="100%"
-                height="400"
+                height="350"
                 style={{ border: 0, borderRadius: "10px" }}
                 loading="lazy"
                 allowFullScreen

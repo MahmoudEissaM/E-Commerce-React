@@ -28,7 +28,7 @@ export function BookTableSection() {
                         <Form.Group className="mb-3">
                             <Form.Control type="time" className="p-2" required />
                         </Form.Group>
-                        <Button variant="warning" type="submit">Book Now</Button>
+                        <Button variant="warning" className="mt-3" type="submit">Book Now</Button>
                     </Form>
                 </Col>
             </Row>
