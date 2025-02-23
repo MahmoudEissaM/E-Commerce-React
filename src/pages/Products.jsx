@@ -10,8 +10,36 @@ import Swal from 'sweetalert2';
 import { ManageUsers } from './ManageUsers';
 import { ManageOrders } from './ManageOrders';
 import { ManageTables } from './ManageTables';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Products() {
+
+    // ========================Prevent Normal Users ===================================
+
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    React.useEffect(() => {
+        if (!user || user.role !== "admin") {
+            toast.error("You do not have permission to access this page this page for admins only.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                style: { backgroundColor: '#dc3545', color: '#fff' },
+            });
+            navigate('/');
+        }
+    }, [user, navigate]);
+
+    // ===================================================================
+
     let [products, setProducts] = useState([]);
     let [filteredProducts, setFilteredProducts] = useState([]);
     let [errors, setErrors] = useState(null);

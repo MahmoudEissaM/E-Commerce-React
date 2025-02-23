@@ -2,8 +2,33 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { MapComponent } from "../components/MapComponent";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function BookTable() {
+
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    React.useEffect(() => {
+        if (!user) {
+            toast.error("You must be logged in to access this page.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                style: { backgroundColor: '#dc3545', color: '#fff' },
+            });
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",

@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Nav, Navbar, Offcanvas, Button, Form, Badge, Dropdown } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FaUtensils, FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
 export function Header({ cartCount, onSearch }) {
     const navigate = useNavigate();
@@ -10,6 +11,27 @@ export function Header({ cartCount, onSearch }) {
     const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/login');
+    };
+
+    const handleCartClick = () => {
+        if (!user) {
+            Swal.fire({
+                title: 'Sign In Required',
+                text: 'You need to sign in or register to access the cart.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sign In',
+                cancelButtonText: 'Register',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    navigate('/register');
+                }
+            });
+        } else {
+            navigate('/cart');
+        }
     };
 
     return (
@@ -49,19 +71,19 @@ export function Header({ cartCount, onSearch }) {
                                     placeholder="Search"
                                     className="me-2"
                                     aria-label="Search"
-                                    onChange={(e) => onSearch(e.target.value)} // هنا بنمرر قيمة البحث
+                                    onChange={(e) => onSearch(e.target.value)}
                                 />
                                 <Button variant="outline-warning">Search</Button>
                             </Form>
 
-                            <NavLink to="/cart" className="nav-link position-relative me-3">
+                            <div className="nav-link position-relative me-3" onClick={handleCartClick} style={{ cursor: 'pointer' }}>
                                 <FaShoppingCart className="text-white fs-4" />
-                                {cartCount > 0 && (
+                                {user && cartCount > 0 && (
                                     <Badge pill bg="warning" text="dark" className="position-absolute top-0 start-100 translate-middle">
                                         {cartCount}
                                     </Badge>
                                 )}
-                            </NavLink>
+                            </div>
 
                             {user ? (
                                 <Dropdown>

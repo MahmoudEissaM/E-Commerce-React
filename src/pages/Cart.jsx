@@ -1,9 +1,31 @@
 import React from 'react';
 import { Container, Table, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cart({ cart, setCart, removeFromCart, updateQuantity }) {
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    React.useEffect(() => {
+        if (!user) {
+            toast.error("You must be logged in to access the cart.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                style: { backgroundColor: '#dc3545', color: '#fff' },
+            });
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
     const calculateTotal = () => {
         return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     };

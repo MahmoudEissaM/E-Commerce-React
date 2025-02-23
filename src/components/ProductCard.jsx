@@ -2,15 +2,31 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { FaShoppingCart, FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
-
+import Swal from 'sweetalert2';
 
 function ProductCard({ product, addToCart }) {
     const navigate = useNavigate();
-    const quantity = parseInt(product.quantity, 10);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const handleAddToCart = () => {
-        addToCart(product);
+        if (!user) {
+            Swal.fire({
+                title: 'Sign In Required',
+                text: 'You need to sign in or register to add items to the cart.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sign In',
+                cancelButtonText: 'Register',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    navigate('/register');
+                }
+            });
+        } else {
+            addToCart(product);
+        }
     };
 
     return (
@@ -27,8 +43,8 @@ function ProductCard({ product, addToCart }) {
                 <Card.Text className="text-center" style={{ fontSize: "14px" }}>
                     {product.description}
                 </Card.Text>
-                <Card.Text className={quantity > 1 ? "text-success fw-bold text-center" : quantity === 1 ? "text-warning fw-bold text-center" : "text-danger fw-bold text-center"}>
-                    {quantity > 1 ? `${quantity} available` : quantity === 1 ? "Only one product left!" : "Sold Out"}
+                <Card.Text className={product.quantity > 1 ? "text-success fw-bold text-center" : product.quantity === 1 ? "text-warning fw-bold text-center" : "text-danger fw-bold text-center"}>
+                    {product.quantity > 1 ? `${product.quantity} available` : product.quantity === 1 ? "Only one product left!" : "Sold Out"}
                 </Card.Text>
                 <div className="d-flex align-items-center justify-content-between">
                     <span className="fw-bold" style={{ color: "#FFD369" }}>${product.price}</span>

@@ -2,8 +2,31 @@ import React, { useState } from 'react';
 import { Container, Table, Button, Form, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Order({ cart }) {
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    React.useEffect(() => {
+        if (!user) {
+            toast.error("You must be logged in to access this page.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                style: { backgroundColor: '#dc3545', color: '#fff' },
+            });
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
     const taxRate = 0.15;
     const deliveryFee = 20.0;
 
@@ -109,7 +132,6 @@ function Order({ cart }) {
             color: '#fff'
         }).then((result) => {
             if (result.isConfirmed) {
-                // إرسال بيانات الطلب إلى data.json
                 fetch('http://localhost:3005/orders', {
                     method: 'POST',
                     headers: {
@@ -127,6 +149,7 @@ function Order({ cart }) {
             }
         });
     };
+
     return (
         <Container className="order-page mt-5 text-light">
             <h2 className="text-center mb-4">Order Summary</h2>

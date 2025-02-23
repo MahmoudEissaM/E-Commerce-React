@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { FaEdit, FaTrash, FaBan, FaCheck } from 'react-icons/fa';
 
+
 export function ManageUsers() {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

@@ -148,6 +148,13 @@
       "password": "123456",
       "role": "admin",
       "isBlocked": false
+    },
+    {
+      "id": "4de2",
+      "name": "user",
+      "email": "user@yahoo.com",
+      "password": "123456",
+      "role": "user"
     }
   ]
 }

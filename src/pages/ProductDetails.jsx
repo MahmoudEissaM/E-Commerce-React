@@ -24,7 +24,6 @@ export function ProductDetails({ addToCart }) {
         return <h2 className="text-center text-light">Loading...</h2>;
     }
 
-    // Function to generate star rating dynamically
     const renderStars = (rating) => {
         const stars = [];
         for (let i = 1; i <= 5; i++) {

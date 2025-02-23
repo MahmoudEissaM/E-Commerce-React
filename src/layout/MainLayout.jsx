@@ -13,6 +13,8 @@ import Cart from "../pages/Cart";
 import Order from "../pages/Order";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function MainLayout() {
     const [cart, setCart] = useState([]);
@@ -54,6 +56,7 @@ export function MainLayout() {
 
     return (
         <BrowserRouter>
+            <ToastContainer />
             <Routes>
                 <Route path='/' element={<SharedLayout cartCount={cartCount} onSearch={handleSearch} />}>
                     <Route index element={<Home addToCart={addToCart} searchQuery={searchQuery} />} />
