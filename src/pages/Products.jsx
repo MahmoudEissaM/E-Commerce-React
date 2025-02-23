@@ -7,8 +7,9 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { deleteProduct } from '../api/productapi';
 import Swal from 'sweetalert2';
-import { ManageUsers } from './ManageUsers'; // هنا بنستورد ManageUsers
-import { ManageOrders } from './ManageOrders'; // هنا بنستورد ManageOrders
+import { ManageUsers } from './ManageUsers';
+import { ManageOrders } from './ManageOrders';
+import { ManageTables } from './ManageTables';
 
 export function Products() {
     let [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ export function Products() {
     let [errors, setErrors] = useState(null);
     let [isLoading, setIsLoading] = useState(true);
     let [search, setSearch] = useState("");
-    const [activeSection, setActiveSection] = useState("menu"); // هنا بنحدد القسم النشط
+    const [activeSection, setActiveSection] = useState("menu");
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -103,7 +104,6 @@ export function Products() {
         <div className='container mt-5'>
             <h2 className='text-center text-warning fw-bold'>Admin Dashboard</h2>
 
-            {/* أزرار التحكم بين الأقسام */}
             <div className="mt-4 d-flex justify-content-center gap-3">
                 <Button
                     variant={activeSection === "menu" ? "warning" : "outline-warning"}
@@ -123,9 +123,14 @@ export function Products() {
                 >
                     Manage Users
                 </Button>
+                <Button
+                    variant={activeSection === "tables" ? "warning" : "outline-warning"}
+                    onClick={() => setActiveSection("tables")}
+                >
+                    Manage Tables
+                </Button>
             </div>
 
-            {/* عرض القسم النشط */}
             <div className="mt-4">
                 {activeSection === "menu" && (
                     <>
@@ -209,6 +214,7 @@ export function Products() {
 
                 {activeSection === "orders" && <ManageOrders />}
                 {activeSection === "users" && <ManageUsers />}
+                {activeSection === "tables" && <ManageTables />}
             </div>
         </div>
     );

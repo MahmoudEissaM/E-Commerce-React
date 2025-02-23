@@ -80,7 +80,6 @@ export function ManageOrders() {
 
     return (
         <div className='container mt-5'>
-            <h2 className='text-center text-warning fw-bold'>Manage Orders</h2>
 
             {isLoading && <div className='mt-5 alert alert-dark'><h1>Loading ...... </h1></div>}
             {errors && <div className='mt-5 alert alert-danger'>{errors.message}</div>}

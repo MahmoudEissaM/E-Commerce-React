@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { FaEdit, FaTrash, FaBan, FaCheck } from 'react-icons/fa'; // هنا بنستورد الأيقونات
+import { FaEdit, FaTrash, FaBan, FaCheck } from 'react-icons/fa';
 
 export function ManageUsers() {
     const [users, setUsers] = useState([]);
@@ -103,7 +103,6 @@ export function ManageUsers() {
 
     return (
         <div className='container mt-5'>
-            <h2 className='text-center text-warning fw-bold'>Manage Users</h2>
 
             {isLoading && <div className='mt-5 alert alert-dark'><h1>Loading ...... </h1></div>}
             {errors && <div className='mt-5 alert alert-danger'>{errors.message}</div>}
