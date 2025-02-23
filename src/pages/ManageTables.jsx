@@ -24,6 +24,9 @@ export function ManageTables() {
         fetchTables();
     }, []);
 
+    // ===========================================================================
+
+
     const handleDelete = async (tableId) => {
         Swal.fire({
             title: "Are you sure?",
@@ -56,6 +59,9 @@ export function ManageTables() {
         });
     };
 
+    // ===========================================================================
+
+
     const handleApprove = async (tableId) => {
         try {
             const table = tables.find(table => table.id === tableId);
@@ -77,6 +83,8 @@ export function ManageTables() {
             });
         }
     };
+    // ===========================================================================
+
 
     return (
         <div className='container mt-5'>

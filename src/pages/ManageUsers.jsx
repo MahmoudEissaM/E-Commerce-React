@@ -26,6 +26,9 @@ export function ManageUsers() {
         fetchUsers();
     }, []);
 
+
+    // ===========================================================================
+
     const handleDelete = async (userId) => {
         Swal.fire({
             title: "Are you sure?",
@@ -58,6 +61,9 @@ export function ManageUsers() {
         });
     };
 
+    // ===========================================================================
+
+
     const handleBlock = async (userId) => {
         try {
             const user = users.find(user => user.id === userId);
@@ -80,6 +86,9 @@ export function ManageUsers() {
         }
     };
 
+    // ===========================================================================
+
+
     const handleUpdateRole = async (userId, newRole) => {
         try {
             const user = users.find(user => user.id === userId);
@@ -101,6 +110,9 @@ export function ManageUsers() {
             });
         }
     };
+
+    // ===========================================================================
+
 
     return (
         <div className='container mt-5'>

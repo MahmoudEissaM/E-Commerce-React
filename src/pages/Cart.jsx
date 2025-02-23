@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Cart({ cart, setCart, removeFromCart, updateQuantity }) {
+
+
+    // =============================Prevent Anonymouse Users =====================================
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -29,6 +32,8 @@ function Cart({ cart, setCart, removeFromCart, updateQuantity }) {
     const calculateTotal = () => {
         return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     };
+
+    // ===========================================================================
 
     const handleRemove = (productId) => {
         Swal.fire({

@@ -24,6 +24,8 @@ export function ManageOrders() {
         fetchOrders();
     }, []);
 
+    // ===========================================================================
+
     const handleDelete = async (orderId) => {
         Swal.fire({
             title: "Are you sure?",
@@ -55,6 +57,8 @@ export function ManageOrders() {
             }
         });
     };
+    // ===========================================================================
+
 
     const handleApprove = async (orderId) => {
         try {
@@ -77,6 +81,8 @@ export function ManageOrders() {
             });
         }
     };
+    // ===========================================================================
+
 
     return (
         <div className='container mt-5'>

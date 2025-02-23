@@ -39,6 +39,9 @@ export function Menu({ addToCart, searchQuery }) {
         setCategoryFilter(category);
     };
 
+    // ===========================================================================
+
+
     return (
         <div className="container mt-4">
             <h2 className="menu-title text-center mb-4" style={{ fontFamily: "'Cinzel', serif", fontSize: "3rem", fontWeight: "700", color: "#FFD369" }}>

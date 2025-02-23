@@ -9,6 +9,8 @@ export function Register() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    // ===========================================================================
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
@@ -41,6 +43,8 @@ export function Register() {
             Swal.fire("Error", "Something went wrong. Please try again.", "error");
         }
     };
+    // ===========================================================================
+
 
     return (
         <div className="container register-container mt-5">

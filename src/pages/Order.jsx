@@ -7,6 +7,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Order({ cart }) {
+
+
+    // ==========================Prevent Anonymouse Users===============================
+
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -26,6 +30,9 @@ function Order({ cart }) {
             navigate('/login');
         }
     }, [user, navigate]);
+
+    // ===========================================================================
+
 
     const taxRate = 0.15;
     const deliveryFee = 20.0;
@@ -52,6 +59,8 @@ function Order({ cart }) {
         const { name, value } = e.target;
         setCustomerInfo({ ...customerInfo, [name]: value });
     };
+
+    // ===========================================================================
 
     const validateForm = () => {
         const phoneRegex = /^(010|011|012|015)\d{8}$/;
@@ -93,6 +102,8 @@ function Order({ cart }) {
         return true;
     };
 
+    // ===========================================================================
+
     const handleConfirmOrder = () => {
         if (!validateForm()) return;
 
@@ -107,6 +118,9 @@ function Order({ cart }) {
             total,
             date: new Date().toISOString()
         };
+
+        // ===========================================================================
+
 
         Swal.fire({
             title: 'Confirm Your Order',
@@ -149,6 +163,8 @@ function Order({ cart }) {
             }
         });
     };
+
+    // ===========================================================================
 
     return (
         <Container className="order-page mt-5 text-light">

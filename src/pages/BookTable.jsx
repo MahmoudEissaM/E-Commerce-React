@@ -2,33 +2,9 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { MapComponent } from "../components/MapComponent";
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2'; // تمت الإضافة
 
 export function BookTable() {
-
-    const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    React.useEffect(() => {
-        if (!user) {
-            toast.error("You must be logged in to access this page.", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                style: { backgroundColor: '#dc3545', color: '#fff' },
-            });
-            navigate('/login');
-        }
-    }, [user, navigate]);
-
-
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -47,10 +23,30 @@ export function BookTable() {
         try {
             const response = await axios.post("http://localhost:3005/Tables", formData);
             console.log("Table booked successfully:", response.data);
-            alert("Table booked successfully!");
+
+            // عرض رسالة نجاح باستخدام SweetAlert2
+            Swal.fire({
+                title: 'Success!',
+                text: 'Your table has been booked successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ffbe33', // لون الزر
+                background: '#222', // لون الخلفية
+                color: '#fff', // لون النص
+            });
         } catch (error) {
             console.error("Error booking table:", error);
-            alert("Error booking table. Please try again.");
+
+            // عرض رسالة خطأ باستخدام SweetAlert2
+            Swal.fire({
+                title: 'Error!',
+                text: 'Failed to book the table. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ffbe33', // لون الزر
+                background: '#222', // لون الخلفية
+                color: '#fff', // لون النص
+            });
         }
     };
 
@@ -90,7 +86,6 @@ export function BookTable() {
                             </Form>
                         </div>
                     </Col>
-
 
                     <Col md={6} className="map-container">
                         <MapComponent />
