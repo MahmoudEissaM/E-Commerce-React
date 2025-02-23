@@ -5,7 +5,7 @@ import { MapComponent } from "../components/MapComponent";
 
 export function BookTable() {
     return (
-        <div style={{ backgroundColor: "#181818", color: "#EEEEEE", minHeight: "100vh", paddingBottom: "50px" }}>
+        <div className="bookTable" >
             <Container className="py-5 mt-5">
                 <Row>
                     <div className="bookTable col-lg-12 d-flex justify-content-center align-items-center">

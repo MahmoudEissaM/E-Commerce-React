@@ -6,6 +6,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import "./styles/index.css"
 import "./styles/login.css"
 import "./styles/register.css"
+import './styles/about.css'
+import './styles/booktable.css'
 
 createRoot(document.getElementById('root')).render(
   <MainLayout />,
