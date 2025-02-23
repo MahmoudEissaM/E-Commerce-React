@@ -11,9 +11,9 @@
 
 ### 🏠 Home Page  
 
-|   HOME Slider  |
-|----------------|
-| <img src="Capture.JPG" width="400"> |
+|   HOME Slider  |  🛒 Menu  |
+|--------------- |------------|
+| <img src="Capture.JPG" width="400"> |  <img src="Capture2.JPG" width="400"> |
 
 
 ### 📦 Full Page 
@@ -21,13 +21,6 @@
 |------------|-----------|
 | <img src="Capture1.JPG" width="400"> | <img src="Capture3.JPG" width="400"> |
  
-
-### 🛒 Menu  
-| Menu Of Resturan|
-|------------|
-| <img src="Capture2.JPG" width="400"> |
- 
----
 
 ---
 
