@@ -120,6 +120,44 @@
       "total": 116.6,
       "date": "2025-02-20T07:09:32.861Z",
       "status": "Approved"
+    },
+    {
+      "id": "1740344282801",
+      "customerInfo": {
+        "name": "mahmoud ahmed",
+        "address": "alsaadat belbies city",
+        "phone": "01015042946",
+        "cardNumber": "",
+        "expiryDate": "",
+        "cvv": ""
+      },
+      "cart": [
+        {
+          "id": "8",
+          "name": "Delicious Pasta",
+          "category": "Pasta",
+          "price": 14,
+          "quantity": 1,
+          "image": "https://themewagon.github.io/feane/images/f4.png",
+          "description": "A delicious pasta with creamy sauce."
+        },
+        {
+          "id": "9",
+          "name": "Delicious Pasta",
+          "category": "Pasta",
+          "price": 14,
+          "quantity": 3,
+          "image": "https://themewagon.github.io/feane/images/f9.png",
+          "description": "A delicious pasta with creamy sauce."
+        }
+      ],
+      "paymentMethod": "Cash on Delivery",
+      "subtotal": 56,
+      "tax": 8.4,
+      "deliveryFee": 20,
+      "total": 84.4,
+      "date": "2025-02-23T20:58:02.801Z",
+      "status": "Approved"
     }
   ],
   "Tables": [
@@ -137,7 +175,8 @@
       "email": "mahmoudessa8200@gmail.com",
       "phone": "01145633756",
       "date": "8123-12-05",
-      "guests": "1"
+      "guests": "1",
+      "status": "Approved"
     },
     {
       "id": "d5aa",
@@ -145,7 +184,17 @@
       "email": "mahmoudessa8200@gmail.com",
       "phone": "01145633756",
       "date": "4210-12-05",
-      "guests": "2"
+      "guests": "2",
+      "status": "Approved"
+    },
+    {
+      "id": "21b8",
+      "name": "testnew",
+      "email": "test@gmail.com",
+      "phone": "01015042946",
+      "date": "2025-04-12",
+      "guests": "2",
+      "status": "Approved"
     }
   ],
   "users": [
