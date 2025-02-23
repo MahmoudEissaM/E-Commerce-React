@@ -1,4 +1,4 @@
-<h1 align="center">🍔 Restaurant Menu App</h1>
+<h1 align="center">🍔 Restaurant</h1>
 
 <p align="center">
   A modern and responsive restaurant menu built with <b>React</b> and <b>Bootstrap</b>. <br>
