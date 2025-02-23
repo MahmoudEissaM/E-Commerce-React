@@ -6,7 +6,7 @@ export function MapComponent() {
             <h3 className="text-warning mb-3">Find Us Here</h3>
             <iframe
                 title="Google Map"
-                width="100%"
+                width="80%"
                 height="400"
                 style={{ border: 0, borderRadius: "10px" }}
                 loading="lazy"
