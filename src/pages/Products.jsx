@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Table, Form } from 'react-bootstrap';
+import { Table, Form, Button } from 'react-bootstrap';
 import { IoEye } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { deleteProduct } from '../api/productapi';
 import Swal from 'sweetalert2';
+import { ManageUsers } from './ManageUsers'; // هنا بنستورد ManageUsers
+import { ManageOrders } from './ManageOrders'; // هنا بنستورد ManageOrders
 
 export function Products() {
     let [products, setProducts] = useState([]);
@@ -14,7 +16,7 @@ export function Products() {
     let [errors, setErrors] = useState(null);
     let [isLoading, setIsLoading] = useState(true);
     let [search, setSearch] = useState("");
-
+    const [activeSection, setActiveSection] = useState("menu"); // هنا بنحدد القسم النشط
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -99,83 +101,115 @@ export function Products() {
 
     return (
         <div className='container mt-5'>
-            <h2 className='text-center text-warning fw-bold'>Manage Menu</h2>
+            <h2 className='text-center text-warning fw-bold'>Admin Dashboard</h2>
 
-            <div className='mt-5 d-flex'>
-                <Link to="/products/new" >
-                    <button className="btn btn-warning fw-bold me-3">Add New </button>
-                </Link>
-
-                <Form.Control
-                    type="text"
-                    className='w-25 border-warning'
-                    placeholder='Search products...'
-                    value={search}
-                    onChange={handleSearch}
-                />
+            {/* أزرار التحكم بين الأقسام */}
+            <div className="mt-4 d-flex justify-content-center gap-3">
+                <Button
+                    variant={activeSection === "menu" ? "warning" : "outline-warning"}
+                    onClick={() => setActiveSection("menu")}
+                >
+                    Manage Menu
+                </Button>
+                <Button
+                    variant={activeSection === "orders" ? "warning" : "outline-warning"}
+                    onClick={() => setActiveSection("orders")}
+                >
+                    Manage Orders
+                </Button>
+                <Button
+                    variant={activeSection === "users" ? "warning" : "outline-warning"}
+                    onClick={() => setActiveSection("users")}
+                >
+                    Manage Users
+                </Button>
             </div>
 
-            {isLoading && <div className='mt-5 alert alert-dark'><h1>Loading ...... </h1></div>}
-            {errors && <div className='mt-5 alert alert-danger'>{errors.message}</div>}
+            {/* عرض القسم النشط */}
+            <div className="mt-4">
+                {activeSection === "menu" && (
+                    <>
+                        <div className='mt-5 d-flex'>
+                            <Link to="/products/new" >
+                                <button className="btn btn-warning fw-bold me-3">Add New </button>
+                            </Link>
 
-            {!isLoading && !errors &&
-                <>
-                    <Table className='mt-4 table-dark table-bordered'>
-                        <thead className="table-warning">
-                            <tr>
-                                <th>Image</th>
-                                <th>ID</th>
-                                <th>Product Name</th>
-                                <th>Product Price</th>
-                                <th>Product Quantity</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredProducts.map((product) => {
-                                return (
-                                    <tr key={product.id}>
-                                        <td>
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                style={{
-                                                    width: "100px",
-                                                    height: "50px",
-                                                    objectFit: "contain",
-                                                    borderRadius: "5px"
-                                                }}
-                                            />
-                                        </td>
-                                        <td>{product.id}</td>
-                                        <td className='fw-bold text-warning'>{product.name}</td>
-                                        <td className='fw-bold'>{product.price.toFixed(2)}$</td>
-                                        <td className={
-                                            product.quantity > 1 ? "text-success fw-bold" :
-                                                product.quantity === 1 ? "text-warning fw-bold" :
-                                                    "text-danger fw-bold"
-                                        }>
-                                            {product.quantity > 1 ? product.quantity :
-                                                product.quantity === 1 ? "Only one product left!" :
-                                                    "Sold Out"}
-                                        </td>
-                                        <td>
-                                            <Link to={`/products/${product.id}/edit`}>
-                                                <FaEdit className='text-info mx-2 fs-4' />
-                                            </Link>
+                            <Form.Control
+                                type="text"
+                                className='w-25 border-warning'
+                                placeholder='Search products...'
+                                value={search}
+                                onChange={handleSearch}
+                            />
+                        </div>
 
-                                            <Link to={`/products/${product.id}`}>
-                                                <IoEye className='text-warning mx-2 fs-4' />
-                                            </Link>
-                                            <MdDelete className='text-danger mx-2 fs-4' style={{ cursor: "pointer" }} onClick={() => deleteHandler(product.id)} />
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table>
-                </>
-            }
+                        {isLoading && <div className='mt-5 alert alert-dark'><h1>Loading ...... </h1></div>}
+                        {errors && <div className='mt-5 alert alert-danger'>{errors.message}</div>}
+
+                        {!isLoading && !errors &&
+                            <>
+                                <Table className='mt-4 table-dark table-bordered'>
+                                    <thead className="table-warning">
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>ID</th>
+                                            <th>Product Name</th>
+                                            <th>Product Price</th>
+                                            <th>Product Quantity</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredProducts.map((product) => {
+                                            return (
+                                                <tr key={product.id}>
+                                                    <td>
+                                                        <img
+                                                            src={product.image}
+                                                            alt={product.name}
+                                                            style={{
+                                                                width: "100px",
+                                                                height: "50px",
+                                                                objectFit: "contain",
+                                                                borderRadius: "5px"
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>{product.id}</td>
+                                                    <td className='fw-bold text-warning'>{product.name}</td>
+                                                    <td className='fw-bold'>{product.price.toFixed(2)}$</td>
+                                                    <td className={
+                                                        product.quantity > 1 ? "text-success fw-bold" :
+                                                            product.quantity === 1 ? "text-warning fw-bold" :
+                                                                "text-danger fw-bold"
+                                                    }>
+                                                        {product.quantity > 1 ? product.quantity :
+                                                            product.quantity === 1 ? "Only one product left!" :
+                                                                "Sold Out"}
+                                                    </td>
+                                                    <td>
+                                                        <Link to={`/products/${product.id}/edit`}>
+                                                            <FaEdit className='text-info mx-2 fs-4' />
+                                                        </Link>
+
+                                                        <Link to={`/products/${product.id}`}>
+                                                            <IoEye className='text-warning mx-2 fs-4' />
+                                                        </Link>
+                                                        <MdDelete className='text-danger mx-2 fs-4' style={{ cursor: "pointer" }} onClick={() => deleteHandler(product.id)} />
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </Table>
+                            </>
+                        }
+                    </>
+                )}
+
+                {activeSection === "orders" && <ManageOrders />}
+                {activeSection === "users" && <ManageUsers />}
+            </div>
         </div>
     );
 }

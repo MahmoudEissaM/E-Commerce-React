@@ -11,21 +11,34 @@ export function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
+        // تحقق من صيغة الإيميل
         if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
             Swal.fire("Error", "Invalid email format!", "error");
             return;
         }
+
+        // تحقق من طول الباسورد
         if (password.length < 6) {
             Swal.fire("Error", "Password must be at least 6 characters long!", "error");
             return;
         }
 
         try {
+            // جلب بيانات اليوزرز من الـ JSON
             const response = await axios.get('http://localhost:3005/users');
             const user = response.data.find(u => u.email === email && u.password === password);
 
             if (user) {
+                // تحقق من حالة اليوزر (blocked أو لا)
+                if (user.isBlocked) {
+                    Swal.fire("Blocked", "Your account is blocked. Please contact support.", "error");
+                    return;
+                }
+
+                // حفظ بيانات اليوزر في الـ localStorage
                 localStorage.setItem('user', JSON.stringify(user));
+
+                // عرض رسالة نجاح وتوجيه اليوزر بناءً على الـ role
                 Swal.fire("Success", "Login successful!", "success").then(() => {
                     navigate(user.role === 'admin' ? '/products' : '/');
                 });
