@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { MapComponent } from "../components/MapComponent";
-import Swal from 'sweetalert2'; // تمت الإضافة
+import Swal from 'sweetalert2';
 
 export function BookTable() {
     const [formData, setFormData] = useState({
@@ -24,31 +24,32 @@ export function BookTable() {
             const response = await axios.post("http://localhost:3005/Tables", formData);
             console.log("Table booked successfully:", response.data);
 
-            // عرض رسالة نجاح باستخدام SweetAlert2
+
             Swal.fire({
                 title: 'Success!',
                 text: 'Your table has been booked successfully.',
                 icon: 'success',
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#ffbe33', // لون الزر
-                background: '#222', // لون الخلفية
-                color: '#fff', // لون النص
+                confirmButtonColor: '#ffbe33',
+                background: '#222',
+                color: '#fff',
             });
         } catch (error) {
             console.error("Error booking table:", error);
 
-            // عرض رسالة خطأ باستخدام SweetAlert2
+
             Swal.fire({
                 title: 'Error!',
                 text: 'Failed to book the table. Please try again.',
                 icon: 'error',
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#ffbe33', // لون الزر
-                background: '#222', // لون الخلفية
-                color: '#fff', // لون النص
+                confirmButtonColor: '#ffbe33',
+                background: '#222',
+                color: '#fff',
             });
         }
     };
+
 
     return (
         <div className="book-table-container">
