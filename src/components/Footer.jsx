@@ -21,7 +21,7 @@ export function Footer() {
                     <a href="#" className="social-link"><FaLinkedin /></a>
                 </div>
 
-                <p className="mt-3 mb-0">&copy; 2025 My Store. All Rights Reserved.</p>
+                <p className="mt-3 mb-0">&copy; 2025 Resturan. All Rights Reserved.</p>
             </Container>
         </footer>
     );

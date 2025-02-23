@@ -7,8 +7,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import ProductCard from "../components/ProductCard";
 import { AboutSection } from "../components/AboutSection";
 import { BookTable } from "./BookTable";
-import { toast } from 'react-toastify'; // تمت الإضافة
-import 'react-toastify/dist/ReactToastify.css'; // تمت الإضافة
 
 export function Home({ addToCart, searchQuery }) {
     const [products, setProducts] = useState([]);
@@ -48,25 +46,6 @@ export function Home({ addToCart, searchQuery }) {
         setCategoryFilter(category);
     };
 
-    const handleAddToCart = (product) => {
-        const user = JSON.parse(localStorage.getItem('user')); // التحقق من حالة المستخدم
-        if (!user) {
-            toast.error("You must be logged in to add items to the cart.", { // إشعار أحمر
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                style: { backgroundColor: '#dc3545', color: '#fff' }, // لون أحمر
-            });
-        } else {
-            addToCart(product); // إضافة المنتج إلى السلة إذا كان المستخدم مسجل دخول
-        }
-    };
-
     return (
         <div className="home-container" style={{ backgroundColor: "#181818", color: "#EEEEEE", paddingBottom: "50px", overflowX: "hidden" }}>
 
@@ -85,8 +64,7 @@ export function Home({ addToCart, searchQuery }) {
                             <p>Delicious burgers, crispy fries, and refreshing drinks all in one place!</p>
                             <Link to="/menu" className="btn btn-warning" >
                                 <FaShoppingCart /> Order Now
-                            </Link>
-                        </div>
+                            </Link>                        </div>
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
@@ -95,8 +73,7 @@ export function Home({ addToCart, searchQuery }) {
                             <p>We use only the freshest ingredients to serve you the best fast food.</p>
                             <Link to="/menu" className="btn btn-warning" >
                                 <FaShoppingCart /> Order Now
-                            </Link>
-                        </div>
+                            </Link>                        </div>
                     </Carousel.Item>
 
                     <Carousel.Item interval={2000}>
@@ -149,7 +126,10 @@ export function Home({ addToCart, searchQuery }) {
                     </div>
                 </div>
 
+
+
                 {/* ================================banners offers end ===================================== */}
+
 
                 {/* ================================menus===================================== */}
 
@@ -168,7 +148,7 @@ export function Home({ addToCart, searchQuery }) {
                 <Row className="justify-content-center">
                     {filteredProducts.map(product => (
                         <Col md={4} sm={6} xs={12} className="mb-4 d-flex justify-content-center" key={product.id}>
-                            <ProductCard product={product} addToCart={handleAddToCart} /> {/* تم التعديل هنا */}
+                            <ProductCard product={product} addToCart={addToCart} />
                         </Col>
                     ))}
                 </Row>

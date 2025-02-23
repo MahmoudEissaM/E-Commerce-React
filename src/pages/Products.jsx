@@ -128,6 +128,8 @@ export function Products() {
         ));
     };
 
+    // ===========================================================================
+
     return (
         <div className='container mt-5'>
             <h2 className='text-center text-warning fw-bold'>Admin Dashboard</h2>
@@ -180,6 +182,10 @@ export function Products() {
                         {errors && <div className='mt-5 alert alert-danger'>{errors.message}</div>}
 
                         {!isLoading && !errors &&
+
+
+                            // ===========================================================================
+
                             <>
                                 <Table className='mt-4 table-dark table-bordered'>
                                     <thead className="table-warning">
@@ -236,6 +242,8 @@ export function Products() {
                                     </tbody>
                                 </Table>
                             </>
+                            // ===========================================================================
+
                         }
                     </>
                 )}
