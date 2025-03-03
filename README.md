@@ -7,10 +7,20 @@
 
 ---
 
-<h2>📸 Screenshot</h2>
-<p align="center">
-  <img src="#" alt="Restaurant App Screenshot" width="800"> <!-- ضع رابط الصورة هنا -->
-</p>
+## 📸 Screenshots  
+
+### 🏠 Home Page  
+
+|   HOME Slider  |  🛒 Menu  |
+|--------------- |------------|
+| <img src="Capture.JPG" width="400"> |  <img src="Capture2.JPG" width="400"> |
+
+
+### 📦 Full Page 
+| Laptop View | Mobile View  |
+|------------|-----------|
+| <img src="Capture1.JPG" width="400"> | <img src="Capture3.JPG" width="400"> |
+ 
 
 ---
 
