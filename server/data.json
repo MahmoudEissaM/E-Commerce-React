@@ -84,11 +84,11 @@
   ],
   "orders": [
     {
-      "id": "1740035372861",
+      "id": "1741230446789",
       "customerInfo": {
-        "name": "mahmoud",
-        "address": "asasdasd",
-        "phone": "01145633756",
+        "name": "Mahmoud Eissa",
+        "address": "Cairo Egypt",
+        "phone": "01015042946",
         "cardNumber": "",
         "expiryDate": "",
         "cvv": ""
@@ -99,7 +99,7 @@
           "name": "Veggie Burger",
           "category": "burger",
           "price": 12,
-          "quantity": 2,
+          "quantity": 1,
           "image": "https://themewagon.github.io/feane/images/f7.png",
           "description": "A healthy veggie burger with fresh ingredients."
         },
@@ -108,24 +108,33 @@
           "name": "Pepperoni Pizza",
           "category": "pizza",
           "price": 20,
-          "quantity": 3,
+          "quantity": 1,
           "image": "https://themewagon.github.io/feane/images/f1.png",
           "description": "Classic pepperoni pizza with a crispy crust."
+        },
+        {
+          "id": "3",
+          "name": "French Fries",
+          "category": "fries",
+          "price": 5,
+          "quantity": 5,
+          "image": "https://themewagon.github.io/feane/images/f5.png",
+          "description": "Crispy golden fries, perfect for any meal."
         }
       ],
       "paymentMethod": "Cash on Delivery",
-      "subtotal": 84,
-      "tax": 12.6,
+      "subtotal": 57,
+      "tax": 8.549999999999999,
       "deliveryFee": 20,
-      "total": 116.6,
-      "date": "2025-02-20T07:09:32.861Z",
+      "total": 85.55,
+      "date": "2025-03-06T03:07:26.789Z",
       "status": "Approved"
     },
     {
-      "id": "1740344282801",
+      "id": "1741448900879",
       "customerInfo": {
-        "name": "mahmoud ahmed",
-        "address": "alsaadat belbies city",
+        "name": "adsadas",
+        "address": "asdasd@gmail.com",
         "phone": "01015042946",
         "cardNumber": "",
         "expiryDate": "",
@@ -133,70 +142,33 @@
       },
       "cart": [
         {
-          "id": "8",
-          "name": "Delicious Pasta",
-          "category": "Pasta",
-          "price": 14,
+          "id": "2",
+          "name": "Pepperoni Pizza",
+          "category": "pizza",
+          "price": 20,
           "quantity": 1,
-          "image": "https://themewagon.github.io/feane/images/f4.png",
-          "description": "A delicious pasta with creamy sauce."
+          "image": "https://themewagon.github.io/feane/images/f1.png",
+          "description": "Classic pepperoni pizza with a crispy crust."
         },
         {
-          "id": "9",
-          "name": "Delicious Pasta",
-          "category": "Pasta",
-          "price": 14,
-          "quantity": 3,
-          "image": "https://themewagon.github.io/feane/images/f9.png",
-          "description": "A delicious pasta with creamy sauce."
+          "id": "4",
+          "name": "Veggie Burger",
+          "category": "burger",
+          "price": 12,
+          "quantity": 1,
+          "image": "https://themewagon.github.io/feane/images/f7.png",
+          "description": "A healthy veggie burger with fresh ingredients."
         }
       ],
       "paymentMethod": "Cash on Delivery",
-      "subtotal": 56,
-      "tax": 8.4,
+      "subtotal": 32,
+      "tax": 4.8,
       "deliveryFee": 20,
-      "total": 84.4,
-      "date": "2025-02-23T20:58:02.801Z",
-      "status": "Approved"
+      "total": 56.8,
+      "date": "2025-03-08T15:48:20.879Z"
     }
   ],
-  "Tables": [
-    {
-      "id": "f5de",
-      "name": "Mahmoud ",
-      "email": "samykandil610@gmail.com",
-      "phone": "01145633756",
-      "date": "0087-12-05",
-      "guests": "2"
-    },
-    {
-      "id": "21a9",
-      "name": "mahmoud ahmed ",
-      "email": "mahmoudessa8200@gmail.com",
-      "phone": "01145633756",
-      "date": "8123-12-05",
-      "guests": "1",
-      "status": "Approved"
-    },
-    {
-      "id": "d5aa",
-      "name": "mahmoud ahmed ",
-      "email": "mahmoudessa8200@gmail.com",
-      "phone": "01145633756",
-      "date": "4210-12-05",
-      "guests": "2",
-      "status": "Approved"
-    },
-    {
-      "id": "21b8",
-      "name": "testnew",
-      "email": "test@gmail.com",
-      "phone": "01015042946",
-      "date": "2025-04-12",
-      "guests": "2",
-      "status": "Approved"
-    }
-  ],
+  "Tables": [],
   "users": [
     {
       "id": "1",
@@ -207,18 +179,17 @@
       "isBlocked": false
     },
     {
-      "id": "84e1",
-      "name": "mahmoud",
-      "email": "Nadia@gmail.com",
-      "password": "123456",
-      "role": "admin",
-      "isBlocked": false
-    },
-    {
       "id": "4de2",
       "name": "user",
       "email": "user@yahoo.com",
       "password": "123456",
+      "role": "user"
+    },
+    {
+      "id": "5403",
+      "name": "newuser",
+      "email": "test@gmail.com",
+      "password": "123456789",
       "role": "user"
     }
   ]
