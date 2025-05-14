@@ -51,7 +51,8 @@ export function Products() {
         const fetchProducts = async () => {
             setIsLoading(true);
             try {
-                let response = await axios.get("http://localhost:3005/products");
+                // Using the new Django API
+                let response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/`);
                 let productsData = response.data.map(product => ({
                     ...product,
                     price: Number(product.price),
@@ -70,7 +71,7 @@ export function Products() {
     }, []);
 
     const addProduct = async (product) => {
-        await axios.post("http://localhost:3005/products", {
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/products/`, {
             ...product,
             price: Number(product.price),
             quantity: Number(product.quantity)
@@ -78,7 +79,7 @@ export function Products() {
     };
 
     const updateProduct = async (productId, product) => {
-        await axios.put(`http://localhost:3005/products/${productId}`, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/api/products/${productId}/`, {
             ...product,
             price: Number(product.price),
             quantity: Number(product.quantity)
