@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Carousel, Button, Row, Col } from "react-bootstrap";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaShoppingCart } from "react-icons/fa";
 import ProductCard from "../components/ProductCard";
 import { AboutSection } from "../components/AboutSection";
 import { BookTable } from "./BookTable";
+import { productsApi } from "../api/apiService";
 
 export function Home({ addToCart, searchQuery }) {
     const [products, setProducts] = useState([]);
@@ -16,7 +16,7 @@ export function Home({ addToCart, searchQuery }) {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("http://localhost:3005/products");
+                const response = await productsApi.getAll();
                 setProducts(response.data);
                 setFilteredProducts(response.data);
             } catch (error) {
