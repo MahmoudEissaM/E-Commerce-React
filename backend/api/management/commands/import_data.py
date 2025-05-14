@@ -8,8 +8,9 @@ class Command(BaseCommand):
     help = 'Import data from JSON file to database'
 
     def handle(self, *args, **kwargs):
-        # Path to the JSON file
-        json_file_path = os.path.join('server', 'data.json')
+        # Path to the JSON file - using absolute path to the project root
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..'))
+        json_file_path = os.path.join(project_root, 'server', 'data.json')
         
         if not os.path.exists(json_file_path):
             self.stdout.write(self.style.ERROR(f'File not found: {json_file_path}'))
@@ -42,40 +43,45 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'Found {len(orders_data)} orders'))
                 
                 for order_data in orders_data:
-                    # Check if order already exists
-                    order_id = order_data.get('id')
-                    if Order.objects.filter(id=order_id).exists():
-                        self.stdout.write(self.style.WARNING(f'Order {order_id} already exists, skipping'))
-                        continue
-                    
-                    # Create customer info
-                    customer_data = order_data.get('customerInfo')
-                    customer_serializer = CustomerInfoSerializer(data=customer_data)
-                    if customer_serializer.is_valid():
-                        customer = customer_serializer.save()
+                    try:
+                        # Check if order already exists
+                        order_id = order_data.get('id')
+                        if Order.objects.filter(id=order_id).exists():
+                            self.stdout.write(self.style.WARNING(f'Order {order_id} already exists, skipping'))
+                            continue
                         
-                        # Create order
-                        new_order_data = {
-                            'id': order_data.get('id'),
-                            'customerInfo': customer.id,
-                            'cart': order_data.get('cart'),
-                            'paymentMethod': order_data.get('paymentMethod'),
-                            'subtotal': order_data.get('subtotal'),
-                            'tax': order_data.get('tax'),
-                            'deliveryFee': order_data.get('deliveryFee'),
-                            'total': order_data.get('total'),
-                            'date': order_data.get('date'),
-                            'status': order_data.get('status', 'Pending')
-                        }
+                        # Create customer info directly without using serializer
+                        customer_data = order_data.get('customerInfo')
+                        customer = CustomerInfo.objects.create(
+                            name=customer_data.get('name'),
+                            address=customer_data.get('address'),
+                            phone=customer_data.get('phone'),
+                            cardNumber=customer_data.get('cardNumber', ''),
+                            expiryDate=customer_data.get('expiryDate', ''),
+                            cvv=customer_data.get('cvv', '')
+                        )
                         
-                        order_serializer = OrderSerializer(data=new_order_data)
-                        if order_serializer.is_valid():
-                            order_serializer.save()
-                            self.stdout.write(self.style.SUCCESS(f'Imported order: {order_id}'))
-                        else:
-                            self.stdout.write(self.style.ERROR(f'Error importing order {order_id}: {order_serializer.errors}'))
-                    else:
-                        self.stdout.write(self.style.ERROR(f'Error importing customer info for order {order_id}: {customer_serializer.errors}'))
+                        # Fix tax precision if needed
+                        tax = order_data.get('tax')
+                        if isinstance(tax, float) and len(str(tax).split('.')[-1]) > 2:
+                            tax = round(tax, 2)
+                        
+                        # Create order directly without using serializer
+                        order = Order.objects.create(
+                            id=order_data.get('id'),
+                            customerInfo=customer,
+                            cart=order_data.get('cart'),
+                            paymentMethod=order_data.get('paymentMethod'),
+                            subtotal=order_data.get('subtotal'),
+                            tax=tax,
+                            deliveryFee=order_data.get('deliveryFee'),
+                            total=order_data.get('total'),
+                            date=order_data.get('date'),
+                            status=order_data.get('status', 'Pending')
+                        )
+                        self.stdout.write(self.style.SUCCESS(f'Imported order: {order_id}'))
+                    except Exception as e:
+                        self.stdout.write(self.style.ERROR(f'Error importing order {order_id}: {str(e)}'))
                 
                 self.stdout.write(self.style.SUCCESS('Data import completed successfully'))
                 
