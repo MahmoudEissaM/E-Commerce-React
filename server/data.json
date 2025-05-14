@@ -166,6 +166,71 @@
       "deliveryFee": 20,
       "total": 56.8,
       "date": "2025-03-08T15:48:20.879Z"
+    },
+    {
+      "id": "1743355189992",
+      "customerInfo": {
+        "name": "esalm eissa",
+        "address": "suez",
+        "phone": "01015042945",
+        "cardNumber": "",
+        "expiryDate": "",
+        "cvv": ""
+      },
+      "cart": [
+        {
+          "id": "7",
+          "name": "Chicken Burger",
+          "category": "burger",
+          "price": 14,
+          "quantity": 1,
+          "image": "https://themewagon.github.io/feane/images/f8.png",
+          "description": "A juicy chicken burger with crispy lettuce."
+        }
+      ],
+      "paymentMethod": "Cash on Delivery",
+      "subtotal": 14,
+      "tax": 2.1,
+      "deliveryFee": 20,
+      "total": 36.1,
+      "date": "2025-03-30T17:19:49.992Z"
+    },
+    {
+      "id": "1743355395047",
+      "customerInfo": {
+        "name": "farida eslam",
+        "address": "suez",
+        "phone": "01015042946",
+        "cardNumber": "",
+        "expiryDate": "",
+        "cvv": ""
+      },
+      "cart": [
+        {
+          "id": "2",
+          "name": "Pepperoni Pizza",
+          "category": "pizza",
+          "price": 20,
+          "quantity": 1,
+          "image": "https://themewagon.github.io/feane/images/f1.png",
+          "description": "Classic pepperoni pizza with a crispy crust."
+        },
+        {
+          "id": "1",
+          "name": "Burger Deluxe",
+          "category": "burger",
+          "price": 15,
+          "quantity": 1,
+          "image": "https://themewagon.github.io/feane/images/f2.png",
+          "description": "A delicious burger with cheese, lettuce, and tomatoes."
+        }
+      ],
+      "paymentMethod": "Cash on Delivery",
+      "subtotal": 35,
+      "tax": 5.25,
+      "deliveryFee": 20,
+      "total": 60.25,
+      "date": "2025-03-30T17:23:15.047Z"
     }
   ],
   "Tables": [],
@@ -190,6 +255,13 @@
       "name": "newuser",
       "email": "test@gmail.com",
       "password": "123456789",
+      "role": "user"
+    },
+    {
+      "id": "9270",
+      "name": "eslam",
+      "email": "eslam@gmail.com",
+      "password": "45633756",
       "role": "user"
     }
   ]
