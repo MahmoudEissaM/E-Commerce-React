@@ -7,6 +7,7 @@ export function ProductForm() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({
+        id: "", // إضافة حقل id
         name: "",
         category: "",
         price: "",
@@ -31,13 +32,11 @@ export function ProductForm() {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
 
+    // تم تغيير هذه الدالة لاستخدام حقل نصي لعنوان URL بدلاً من تحميل الملف
     const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const blobURL = URL.createObjectURL(file);
-            setPreview(blobURL);
-            setProduct({ ...product, image: blobURL });
-        }
+        const imageUrl = e.target.value;
+        setPreview(imageUrl);
+        setProduct({ ...product, image: imageUrl });
     };
 
     const handleSubmit = async (e) => {
@@ -46,7 +45,12 @@ export function ProductForm() {
             if (id) {
                 await productsApi.update(id, product);
             } else {
-                await productsApi.create(product);
+                // توليد قيمة لحقل id قبل إرسال البيانات
+                const newProduct = {
+                    ...product,
+                    id: Date.now().toString() // استخدام الطابع الزمني الحالي كقيمة لحقل id
+                };
+                await productsApi.create(newProduct);
             }
             navigate("/products");
         } catch (error) {
@@ -109,8 +113,16 @@ export function ProductForm() {
                             </div>
 
                             <div className="col-md-6 d-flex flex-column align-items-center">
-                                <label className="form-label fw-bold">Product Image</label>
-                                <input type="file" className="form-control mb-3 bg-secondary text-white" accept="image/*" onChange={handleImageChange} required={!id} />
+                                <label className="form-label fw-bold">Product Image URL</label>
+                                <input 
+                                    type="url" 
+                                    className="form-control mb-3 bg-secondary text-white" 
+                                    placeholder="https://example.com/image.jpg" 
+                                    name="image"
+                                    value={product.image}
+                                    onChange={handleChange} 
+                                    required
+                                />
 
                                 {preview ? (
                                     <img src={preview} alt="Preview" className="img-fluid rounded shadow" style={{ maxHeight: "250px", objectFit: "contain" }} />
