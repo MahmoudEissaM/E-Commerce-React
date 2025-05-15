@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { authApi } from '../api/apiService';
 
 export function Login() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
@@ -13,10 +13,7 @@ export function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-            Swal.fire("Error", "Invalid email format!", "error");
-            return;
-        }
+        // تم إزالة التحقق من صيغة البريد الإلكتروني لأننا نسمح بتسجيل الدخول باستخدام اسم المستخدم أيضًا
 
         if (password.length < 6) {
             Swal.fire("Error", "Password must be at least 6 characters long!", "error");
@@ -25,7 +22,7 @@ export function Login() {
 
         try {
             // Use the new authentication API
-            const response = await authApi.login({ username: email, password: password });
+            const response = await authApi.login({ username: username, password: password });
             
             if (response.data && response.data.token) {
                 const user = {
@@ -57,11 +54,11 @@ export function Login() {
             <h2 className="text-center login">Login</h2>
             <form onSubmit={handleLogin} className="loginForm shadow p-4 bg-light rounded">
                 <input
-                    type="email"
-                    placeholder="Email"
+                    type="text"
+                    placeholder="Username or Email"
                     className="form-control mb-3"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                 />
                 <input
