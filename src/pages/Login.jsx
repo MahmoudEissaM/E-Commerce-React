@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import { authApi } from '../api/apiService';
 
 export function Login() {
     const [email, setEmail] = useState('');
@@ -24,15 +24,20 @@ export function Login() {
         }
 
         try {
-            const response = await axios.get('http://localhost:3005/users');
-            const user = response.data.find(u => u.email === email && u.password === password);
-
-            if (user) {
-                if (user.isBlocked) {
-                    Swal.fire("Blocked", "Your account is blocked. Please contact support.", "error");
-                    return;
-                }
-
+            // Use the new authentication API
+            const response = await authApi.login({ username: email, password: password });
+            
+            if (response.data && response.data.token) {
+                const user = {
+                    id: response.data.user_id,
+                    username: response.data.username,
+                    email: response.data.email,
+                    role: response.data.role,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
+                    token: response.data.token
+                };
+                
                 localStorage.setItem('user', JSON.stringify(user));
 
                 Swal.fire("Success", "Login successful!", "success").then(() => {
@@ -42,7 +47,7 @@ export function Login() {
                 Swal.fire("Error", "Invalid email or password!", "error");
             }
         } catch (err) {
-            Swal.fire("Error", "Something went wrong. Please try again.", "error");
+            Swal.fire("Error", err.response?.data?.error || "Something went wrong. Please try again.", "error");
         }
     };
     // ===========================================================================

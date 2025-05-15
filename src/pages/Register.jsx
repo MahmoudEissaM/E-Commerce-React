@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import { authApi } from '../api/apiService';
 
 export function Register() {
     const [name, setName] = useState('');
@@ -24,23 +24,33 @@ export function Register() {
         }
 
         try {
-            const response = await axios.get('http://localhost:3005/users');
-            const existingUser = response.data.find(user => user.email === email);
-
-            if (existingUser) {
-                Swal.fire("Error", "Email already registered!", "error");
-                return;
-            }
-
-            const newUser = { name, email, password, role: "user" };
-            await axios.post('http://localhost:3005/users', newUser);
+            // Create new user with the Django API
+            const newUser = { 
+                username: email,  // Using email as username
+                email: email, 
+                password: password, 
+                first_name: name,
+                role: "customer" 
+            };
+            
+            await authApi.register(newUser);
 
             Swal.fire("Success", "Registration successful!", "success").then(() => {
                 navigate('/login');
             });
 
         } catch (err) {
-            Swal.fire("Error", "Something went wrong. Please try again.", "error");
+            // Handle different error responses
+            if (err.response && err.response.data) {
+                // Check for specific error messages from the backend
+                if (err.response.data.username) {
+                    Swal.fire("Error", "This email is already registered!", "error");
+                } else {
+                    Swal.fire("Error", err.response.data.detail || "Registration failed. Please try again.", "error");
+                }
+            } else {
+                Swal.fire("Error", "Something went wrong. Please try again.", "error");
+            }
         }
     };
     // ===========================================================================

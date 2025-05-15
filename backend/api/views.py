@@ -1,7 +1,9 @@
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from .models import Product, CustomerInfo, Order, Table
 from .serializers import ProductSerializer, CustomerInfoSerializer, OrderSerializer, TableSerializer, UserSerializer
 import json
@@ -76,7 +78,32 @@ class TableViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser]
+    
+    def get_permissions(self):
+        if self.action == 'create':
+            return [permissions.AllowAny()]
+        return [permissions.IsAdminUser()]
+    
+    @action(detail=False, methods=['post'])
+    def login(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        
+        user = authenticate(username=username, password=password)
+        
+        if user:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                'token': token.key,
+                'user_id': user.pk,
+                'username': user.username,
+                'email': user.email,
+                'role': 'admin' if user.is_staff else 'customer',
+                'first_name': user.first_name,
+                'last_name': user.last_name
+            })
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['POST'])
 def import_data_from_json(request):

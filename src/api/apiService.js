@@ -34,12 +34,24 @@ export const tablesApi = {
   delete: (id) => api.delete(`/api/tables/${id}/`),
 };
 
-// Users API - Note: This will need to be implemented in the Django backend
-export const usersApi = {
+// Users API and Authentication
+export const authApi = {
+  // Register a new user
+  register: (userData) => api.post('/api/users/', userData),
+  
+  // Login user
+  login: (credentials) => api.post('/api/users/login/', credentials),
+  
+  // Get all users (admin only)
   getAll: () => api.get('/api/users/'),
+  
+  // Get user by ID (admin only)
   getById: (id) => api.get(`/api/users/${id}/`),
-  create: (user) => api.post('/api/users/', user),
-  update: (id, user) => api.put(`/api/users/${id}/`, user),
+  
+  // Update user
+  update: (id, userData) => api.put(`/api/users/${id}/`, userData),
+  
+  // Delete user (admin only)
   delete: (id) => api.delete(`/api/users/${id}/`),
 };
 
@@ -47,5 +59,5 @@ export default {
   productsApi,
   ordersApi,
   tablesApi,
-  usersApi,
+  authApi,
 };
