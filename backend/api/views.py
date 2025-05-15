@@ -13,6 +13,16 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     
+    def create(self, request, *args, **kwargs):
+        print("Received data:", request.data)
+        serializer = self.get_serializer(data=request.data)
+        if not serializer.is_valid():
+            print("Validation errors:", serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
     def get_queryset(self):
         queryset = Product.objects.all()
         category = self.request.query_params.get('category', None)
@@ -24,6 +34,45 @@ class ProductViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().order_by('-date')
     serializer_class = OrderSerializer
+    permission_classes = [permissions.AllowAny]  # Changed to AllowAny for testing
+    
+    def get_permissions(self):
+        """Allow unauthenticated access to specific actions"""
+        if self.action in ['create', 'list', 'retrieve']:
+            return [permissions.AllowAny()]
+        return super().get_permissions()
+    
+    @action(detail=False, methods=['get'])
+    def my_orders(self, request):
+        """Get orders for the current user"""
+        # For testing purposes, return all orders
+        # In production, you would want to filter by user
+        orders = Order.objects.all().order_by('-date')[:10]  # Limit to 10 most recent orders for testing
+        serializer = self.get_serializer(orders, many=True)
+        return Response(serializer.data)
+        
+        # The code below is commented out for testing purposes
+        # Get user token from request
+        # auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+        # if auth_header.startswith('Token '):
+        #     token_key = auth_header.split(' ')[1]
+        #     try:
+        #         token = Token.objects.get(key=token_key)
+        #         user = token.user
+        #         
+        #         # Get customer info records associated with this user
+        #         # This is a simplification - in a real app, you'd have a direct link between User and CustomerInfo
+        #         # Here we're using the user's name to find their orders
+        #         customer_infos = CustomerInfo.objects.filter(name__icontains=user.username)
+        #         
+        #         # Get orders for these customer infos
+        #         orders = Order.objects.filter(customerInfo__in=customer_infos).order_by('-date')
+        #         serializer = self.get_serializer(orders, many=True)
+        #         return Response(serializer.data)
+        #     except Token.DoesNotExist:
+        #         pass
+        # 
+        # return Response({"error": "Authentication required"}, status=status.HTTP_401_UNAUTHORIZED)
     
     def create(self, request, *args, **kwargs):
         data = request.data

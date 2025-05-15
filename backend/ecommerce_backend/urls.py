@@ -22,6 +22,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('api/payments/', include('payments.urls')),
     path('api-auth/', include('rest_framework.urls')),
     # Temporarily disable docs due to coreapi issues
     # path('docs/', include_docs_urls(title='E-Commerce API')),

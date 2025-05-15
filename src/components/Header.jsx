@@ -91,6 +91,8 @@ export function Header({ cartCount, onSearch }) {
                                         <FaUserCircle className="me-2" /> {user.name} {user.role === "admin" && "(Admin)"}
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu align="end">
+                                        <Dropdown.Item onClick={() => navigate('/orders')}>My Orders</Dropdown.Item>
+                                        <Dropdown.Divider />
                                         <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>

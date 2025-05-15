@@ -11,6 +11,8 @@ import { About } from "../pages/About";
 import { BookTable } from "../pages/BookTable";
 import Cart from "../pages/Cart";
 import Order from "../pages/Order";
+import StripePayment from "../pages/StripePayment";
+import OrdersPage from "../pages/OrdersPage";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ToastContainer } from 'react-toastify';
@@ -69,6 +71,8 @@ export function MainLayout() {
                     <Route path='/book-table' element={<BookTable />} />
                     <Route path='/cart' element={<Cart cart={cart} setCart={setCart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
                     <Route path='/order' element={<Order cart={cart} />} />
+                    <Route path='/stripe-payment' element={<StripePayment />} />
+                    <Route path='/orders' element={<OrdersPage />} />
 
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />

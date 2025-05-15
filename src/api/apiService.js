@@ -7,6 +7,20 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+// Add token to requests if available
+api.interceptors.request.use(
+  (config) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.token) {
+      config.headers.Authorization = `Token ${user.token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Products API
 export const productsApi = {
   getAll: () => api.get('/api/products/'),
@@ -20,6 +34,7 @@ export const productsApi = {
 export const ordersApi = {
   getAll: () => api.get('/api/orders/'),
   getById: (id) => api.get(`/api/orders/${id}/`),
+  getMyOrders: () => api.get('/api/orders/my_orders/'),
   create: (order) => api.post('/api/orders/', order),
   update: (id, order) => api.put(`/api/orders/${id}/`, order),
   delete: (id) => api.delete(`/api/orders/${id}/`),
