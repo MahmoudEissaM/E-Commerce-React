@@ -30,7 +30,7 @@ function Cart({ cart, setCart, removeFromCart, updateQuantity }) {
     }, [user, navigate]);
 
     const calculateTotal = () => {
-        return cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
+        return cart.reduce((total, product) => total + Number(product.price) * product.quantity, 0).toFixed(2);
     };
 
     // ===========================================================================
@@ -82,7 +82,7 @@ function Cart({ cart, setCart, removeFromCart, updateQuantity }) {
                                         />
                                     </td>
                                     <td>{product.name}</td>
-                                    <td>${product.price.toFixed(2)}</td>
+                                    <td>${Number(product.price).toFixed(2)}</td>
                                     <td className="quantity-control">
                                         <Button
                                             variant="secondary"
@@ -98,7 +98,7 @@ function Cart({ cart, setCart, removeFromCart, updateQuantity }) {
                                             +
                                         </Button>
                                     </td>
-                                    <td>${(product.price * product.quantity).toFixed(2)}</td>
+                                    <td>${(Number(product.price) * product.quantity).toFixed(2)}</td>
                                     <td>
                                         <Button variant="danger" size="sm" onClick={() => handleRemove(product.id)}>Delete</Button>
                                     </td>
