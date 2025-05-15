@@ -1,8 +1,8 @@
-<h1 align="center">🍔 Restaurant</h1>
+<h1 align="center">🍔 Restoran</h1>
 
 <p align="center">
-  A modern and responsive restaurant menu built with <b>React</b> and <b>Bootstrap</b>. <br>
-  Browse different food categories, add items to your cart, and view detailed product information.
+  A modern and responsive restaurant e-commerce platform built with <b>React</b>, <b>Bootstrap</b>, and <b>Django</b>. <br>
+  Browse different food categories, add items to your cart, place orders, and make secure payments with Stripe.
 </p>
 
 ---
@@ -33,6 +33,10 @@
   <li>✔️ Apply filters based on price, category, and availability</li>
   <li>✔️ Order management system (for Admins)</li>
   <li>✔️ User management system (for Admins)</li>
+  <li>✔️ Secure payment processing with Stripe integration</li>
+  <li>✔️ Order history and tracking for users</li>
+  <li>✔️ Table reservation system</li>
+  <li>✔️ Responsive design for all devices</li>
 </ul>
 
 ---
@@ -79,20 +83,121 @@
 
 ---
 
-<h2>🛠️ Tech Stack</h2>
+<h2>🔧️ Tech Stack</h2>
 <h3>Frontend</h3>
 <ul>
   <li>HTML, CSS, JavaScript</li>
   <li>React.js</li>
   <li>Bootstrap</li>
   <li>FontAwesome</li>
+  <li>Stripe Elements (for payment processing)</li>
+  <li>Axios (for API requests)</li>
+  <li>React Router (for navigation)</li>
+  <li>SweetAlert2 (for notifications)</li>
 </ul>
 
 <h3>Backend</h3>
 <ul>
-  <li>JSON Server (Mock API for development)</li>
+  <li>Django</li>
+  <li>Django REST Framework</li>
+  <li>Stripe API</li>
+  <li>SQLite (development) / PostgreSQL (production)</li>
 </ul>
 
 ---
 
+<h2>💻 Installation & Setup</h2>
 
+### Prerequisites
+- Node.js (v18+)
+- Python (v3.8+)
+- Stripe account for payment processing
+
+### Environment Variables
+Create a `.env` file in the root directory with the following variables:
+```
+# Django Secret Key
+SECRET_KEY=your_django_secret_key_here
+
+# Database Configuration
+DB_NAME=your_db_name
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_HOST=your_db_host
+
+# Stripe API Keys
+STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key_here
+STRIPE_SECRET_KEY=your_stripe_secret_key_here
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret_here
+
+# Frontend API URL
+VITE_API_URL=http://localhost:8000
+```
+
+### Backend Setup
+```bash
+# Navigate to backend directory
+cd backend
+
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py migrate
+
+# Create a superuser (for admin access)
+python manage.py createsuperuser
+
+# Start the Django server
+python manage.py runserver
+```
+
+### Frontend Setup
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+### Accessing the Application
+- Frontend: http://localhost:5173 (or the port shown in your terminal)
+- Backend API: http://localhost:8000/api/
+- Admin Dashboard: http://localhost:8000/admin/
+
+---
+
+<h2>💳 Payment System</h2>
+
+### Overview
+The application integrates with Stripe to provide a secure and seamless payment experience. Users can pay for their orders using credit/debit cards through the Stripe payment gateway.
+
+### Payment Flow
+1. User adds items to cart and proceeds to checkout
+2. User fills in delivery information and selects payment method
+3. When selecting credit card payment, the Stripe payment form is displayed
+4. User enters card details (Stripe securely handles the card information)
+5. On successful payment, the order is created and confirmed
+6. User receives confirmation and can view order details in their order history
+
+### Test Cards
+For testing purposes, you can use the following Stripe test cards:
+- Card Number: `4242 4242 4242 4242` (Successful payment)
+- Expiration Date: Any future date
+- CVC: Any 3 digits
+- ZIP: Any 5 digits
+
+### Order Management
+Users can view their order history and status through the "My Orders" section accessible from the user dropdown menu. Admins can manage all orders through the admin dashboard.
+
+---
