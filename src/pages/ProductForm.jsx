@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { productsApi } from "../api/apiService";
 
 export function ProductForm() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export function ProductForm() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:3005/products/${id}`)
+            productsApi.getById(id)
                 .then((response) => {
                     setProduct(response.data);
                     setPreview(response.data.image);
@@ -43,9 +44,9 @@ export function ProductForm() {
         e.preventDefault();
         try {
             if (id) {
-                await axios.put(`http://localhost:3005/products/${id}`, product);
+                await productsApi.update(id, product);
             } else {
-                await axios.post("http://localhost:3005/products", product);
+                await productsApi.create(product);
             }
             navigate("/products");
         } catch (error) {
@@ -76,7 +77,19 @@ export function ProductForm() {
 
                                 <div className="mb-3">
                                     <label className="form-label fw-bold">Category</label>
-                                    <input type="text" className="form-control bg-secondary text-white" name="category" value={product.category} onChange={handleChange} required />
+                                    <select 
+                                        className="form-select bg-secondary text-white" 
+                                        name="category" 
+                                        value={product.category} 
+                                        onChange={handleChange} 
+                                        required
+                                    >
+                                        <option value="">Select a category</option>
+                                        <option value="burger">Burger</option>
+                                        <option value="pizza">Pizza</option>
+                                        <option value="pasta">Pasta</option>
+                                        <option value="fries">Fries</option>
+                                    </select>
                                 </div>
 
                                 <div className="mb-3">
