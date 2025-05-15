@@ -38,7 +38,7 @@ function Order({ cart }) {
     const deliveryFee = 20.0;
 
     const calculateSubtotal = () => {
-        return cart.reduce((total, product) => total + product.price * product.quantity, 0);
+        return cart.reduce((total, product) => total + Number(product.price) * product.quantity, 0);
     };
 
     const subtotal = calculateSubtotal();
@@ -185,9 +185,9 @@ function Order({ cart }) {
                             <tr key={index}>
                                 <td>{item.name}</td>
                                 <td><img src={item.image} alt={item.name} style={{ width: '60px', height: '60px', objectFit: 'contain' }} /></td>
-                                <td>${item.price.toFixed(2)}</td>
+                                <td>${Number(item.price).toFixed(2)}</td>
                                 <td>{item.quantity}</td>
-                                <td>${(item.price * item.quantity).toFixed(2)}</td>
+                                <td>${(Number(item.price) * item.quantity).toFixed(2)}</td>
                             </tr>
                         ))}
                     </tbody>
